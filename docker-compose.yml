@@ -1,0 +1,43 @@
+---
+
+services:
+  registry:
+    image: $REGISTRY_IMAGE
+    container_name: $REGISTRY_NAME
+    ports:
+      - "$REGISTRY_PORT:5000"
+    environment:
+      REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY: /var/lib/registry
+      REGISTRY_HTTP_HEADERS_Access-Control-Allow-Origin: '[http://$SERVR_IP:$REGUI_PORT]'
+      REGISTRY_HTTP_HEADERS_Access-Control-Allow-Methods: '[HEAD,GET,OPTIONS,DELETE]'
+      REGISTRY_HTTP_HEADERS_Access-Control-Allow-Headers: '[Authorization,Accept,Cache-Control]'
+    volumes:
+      - registry-data:/var/lib/registry
+    networks:
+      network:
+        ipv4_address: $REGUI_HOST
+
+  registry-frontend:
+    image: konradkleine/docker-registry-frontend:v2
+    container_name: registry-frontend
+    ports:
+      - "8080:80"
+    environment:
+      ENV_DOCKER_REGISTRY_HOST: registry
+      ENV_DOCKER_REGISTRY_PORT: 5000
+      ENV_DOCKER_REGISTRY_USE_SSL: "0"
+    depends_on:
+      - registry
+    networks:
+      network:
+        ipv4_address: $REGUI_HOST
+
+networks:
+  network:
+    name: $REGISTRY_NET
+    external: true
+    driver: bridge
+    ipam:
+      config:
+        - subnet: $NETWORK_ADDR
+          gateway: $NETWORK_GATE
