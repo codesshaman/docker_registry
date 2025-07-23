@@ -11,13 +11,13 @@ services:
       REGISTRY_HTTP_HEADERS_Access-Control-Allow-Origin: '[http://$SERVR_IP:$REGUI_PORT]'
       REGISTRY_HTTP_HEADERS_Access-Control-Allow-Methods: '[HEAD,GET,OPTIONS,DELETE]'
       REGISTRY_HTTP_HEADERS_Access-Control-Allow-Headers: '[Authorization,Accept,Cache-Control]'
-    volumes:
-      - registry-data:/var/lib/registry
+    # volumes:
+    #   - registry-data:/var/lib/registry
     networks:
       network:
-        ipv4_address: $REGUI_HOST
+        ipv4_address: $REGISTRY_HOST
 
-  registry-frontend:
+  registry_ui:
     image: konradkleine/docker-registry-frontend:v2
     container_name: registry-frontend
     ports:

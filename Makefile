@@ -93,7 +93,7 @@ net:
 	  --driver=bridge \
 	  --subnet=$(NETWORK_ADDR) \
 	  --gateway=$(NETWORK_GATE) \
-	  $(APICURIO_NET)
+	  $(REGISTRY_NET)
 
 ps:
 	@printf "$(YELLOW)==== Просмотр работающих контейнеров конфигурации ${name}... ====$(NO_COLOR)\n"
