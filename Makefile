@@ -1,4 +1,4 @@
-name = Appicurio Registry
+name = Docker Registry
 
 VAR :=				# Cmd arg var
 NO_COLOR=\033[0m	# Color Reset
@@ -23,11 +23,10 @@ help:
 	@echo -e "$(WARN)- make conn			: Подключение к ${REGISTRY_NAME}"
 	@echo -e "$(WARN)- make con			: Подключение к ${REGISTRY_NAME}"
 	@echo -e "$(WARN)- make condb			: Подключение к ${POSTGRES_NAME}"
-	@echo -e "$(WARN)- make conui			: Подключение к ${REGSTGUI_NAME}"
+	@echo -e "$(WARN)- make conui			: Подключение к ${REGUI_NAME}"
 	@echo -e "$(WARN)- make down			: Остановка конфигурации"
 	@echo -e "$(WARN)- make env			: Создание .env-файла"
 	@echo -e "$(WARN)- make log			: Просмотреть логи ${REGISTRY_NAME}"
-	@echo -e "$(WARN)- make logdb			: Просмотреть логи ${POSTGRES_NAME}"
 	@echo -e "$(WARN)- make logui			: Просмотреть логи ${REGSTGUI_NAME}"
 	@echo -e "$(WARN)- make net			: Создать сеть с именем из .env"
 	@echo -e "$(WARN)- make ps			: Обзор запущенной конфигурации"
@@ -41,6 +40,10 @@ help:
 build:
 	@printf "Сборка конфигурации ${name}...\n"
 	@docker-compose -f ./docker-compose.yml up -d --build
+
+cert:
+	@printf "$(YELLOW)==== Установка сертификата и ключа для ${name} ====$(NO_COLOR)\n"
+	@bash scripts/certificates.sh
 
 conn:
 	@printf "$(ERROR_COLOR)==== Соединение с контейнером ${REGISTRY_NAME}... ====$(NO_COLOR)\n"
