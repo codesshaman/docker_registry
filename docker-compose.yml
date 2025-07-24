@@ -44,3 +44,10 @@ networks:
       config:
         - subnet: $NETWORK_ADDR
           gateway: $NETWORK_GATE
+
+volumes:
+  registry-data:
+    driver_opts:
+      o: bind
+      type: none
+      device: $REGISTRY_VOLUME
