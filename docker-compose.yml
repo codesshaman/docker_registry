@@ -15,7 +15,7 @@ services:
       REGISTRY_HTTP_HEADERS_Access-Control-Allow-Headers: '["Authorization","Accept","Cache-Control"]'
     volumes:
       - registry-data:/var/lib/registry
-      - certificates:/certs
+      - ./certs:/certs
     networks:
       network:
         ipv4_address: $REGISTRY_HOST
