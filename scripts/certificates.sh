@@ -13,7 +13,7 @@ fi
 # Файлы будут сгенерированы сразу с нужными именами:
 # - <домен>.crt для сертификата
 # - <домен>.key для приватного ключа
-mkcert -cert-file "${DOMAIN}.crt" -key-file "${DOMAIN}.key" "$DOMAIN"
+mkcert -cert-file ./certs/"${DOMAIN}.crt" -key-file ./certs/"${DOMAIN}.key" "$DOMAIN"
 
 # Проверка успешности выполнения команды
 if [ $? -eq 0 ]; then
