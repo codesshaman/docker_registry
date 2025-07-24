@@ -20,6 +20,7 @@ help:
 	@echo -e "$(OK)==== Все команды для конфигурации ${name} ===="
 	@echo -e "$(WARN)- make				: Запуск конфигурации"
 	@echo -e "$(WARN)- make build			: Сборка конфигурации"
+	@echo -e "$(WARN)- make config			: Вывод docker-compose config"
 	@echo -e "$(WARN)- make conn			: Подключение к ${REGISTRY_NAME}"
 	@echo -e "$(WARN)- make con			: Подключение к ${REGISTRY_NAME}"
 	@echo -e "$(WARN)- make condb			: Подключение к ${POSTGRES_NAME}"
@@ -40,6 +41,10 @@ help:
 build:
 	@printf "Сборка конфигурации ${name}...\n"
 	@docker-compose -f ./docker-compose.yml up -d --build
+
+config:
+	@printf "$(ERROR_COLOR)==== Соединение с контейнером ${REGISTRY_NAME}... ====$(NO_COLOR)\n"
+	@docker-compose config
 
 cert:
 	@printf "$(YELLOW)==== Установка сертификата и ключа для ${name} ====$(NO_COLOR)\n"

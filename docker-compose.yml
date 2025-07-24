@@ -7,14 +7,14 @@ services:
     ports:
       - "$REGISTRY_PORT:5000"
     environment:
-      REGISTRY_HTTP_TLS_CERTIFICATE: "/certs/${REGISTRY_CERT}"
-      REGISTRY_HTTP_TLS_KEY: "/certs/${REGISTRY_KEY}"
+      REGISTRY_HTTP_TLS_CERTIFICATE: "./certs/${REGISTRY_CERT}"
+      REGISTRY_HTTP_TLS_KEY: "./certs/${REGISTRY_KEY}"
       REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY: "/var/lib/registry"
       REGISTRY_HTTP_HEADERS_Access-Control-Allow-Origin: '["http://${SERVR_IP}:${REGUI_PORT}"]'
       REGISTRY_HTTP_HEADERS_Access-Control-Allow-Methods: '["HEAD","GET","OPTIONS","DELETE"]'
       REGISTRY_HTTP_HEADERS_Access-Control-Allow-Headers: '["Authorization","Accept","Cache-Control"]'
     volumes:
-      - registry-data:/var/lib/registry
+      - $REGISTRY_VOLUME:/var/lib/registry
       - ./certs:/certs
     networks:
       network:
@@ -44,10 +44,3 @@ networks:
       config:
         - subnet: $NETWORK_ADDR
           gateway: $NETWORK_GATE
-
-volumes:
-  registry-data:
-    driver_opts:
-      o: bind
-      type: none
-      device: $REGISTRY_VOLUME
