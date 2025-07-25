@@ -20,6 +20,7 @@ help:
 	@echo -e "$(OK)==== Все команды для конфигурации ${name} ===="
 	@echo -e "$(WARN)- make				: Запуск конфигурации"
 	@echo -e "$(WARN)- make build			: Сборка конфигурации"
+	@echo -e "$(WARN)- make cert			: Создание сертификатов"
 	@echo -e "$(WARN)- make config			: Вывод docker-compose config"
 	@echo -e "$(WARN)- make conn			: Подключение к ${REGISTRY_NAME}"
 	@echo -e "$(WARN)- make con			: Подключение к ${REGISTRY_NAME}"
