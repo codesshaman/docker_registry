@@ -24,7 +24,7 @@ services:
     image: konradkleine/docker-registry-frontend:v2
     container_name: registry-frontend
     ports:
-      - "8080:80"
+      - "$REGUI_PORT:80"
     environment:
       ENV_DOCKER_REGISTRY_HOST: registry
       ENV_DOCKER_REGISTRY_PORT: 5000
